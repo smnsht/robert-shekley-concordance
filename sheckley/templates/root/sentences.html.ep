@@ -1,0 +1,8 @@
+<%
+	layout('default');
+	title('Sentences with word ' . param('word'));
+%>
+
+<h1>Sentences with word &quot;<%= param('word') %>&quot;</h1>
+
+%= include '_sentences'

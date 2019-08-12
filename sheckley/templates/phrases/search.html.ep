@@ -1,0 +1,34 @@
+<%
+	layout('default');
+	title("Search for $phrase");
+	
+	use vars qw($phrase $lines);
+%>
+
+<h1>Search for &quot;<%=$phrase%>&quot;</h1>
+
+
+<% if (@$lines) { %>
+
+	<table class="zebra">
+		<thead>
+			<tr>
+				<th>Work</th>
+				<th>Paragraph</th>
+				<th>Sentence</th>
+			</tr>
+		</thead>
+		<tbody>
+			<% foreach (@$lines) { %>
+			<tr>				
+				<td><%= $_->{title} %></td>
+				<td><%= $_->{paragraph_no} %></td>
+				<td><%= $_->{content} %></td>
+			</tr>
+			<% }%>
+		</tbody>
+	</table>
+
+<% } else { %>
+	<h3>Not found...</h3>
+<% }%>

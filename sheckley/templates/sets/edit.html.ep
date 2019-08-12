@@ -1,0 +1,47 @@
+<%
+	layout('default');
+	title('Welcome');
+	
+	use vars qw($self $wordset);
+%>
+
+<h1>Edit wordset</h1>
+
+<form method="POST" class="sheckley-form">
+	<p>
+		<label>Wordset name:</label>
+		%= tel_field 'name', $wordset->{name}
+	</p>
+	
+	<p>
+		<label>Description</label>
+		%= tel_field 'description', $wordset->{description}
+	</p>
+	
+	<p>
+		
+		<% if ($self->stash('mojo.validation')->error('words')) { %>
+			<label class="field-with-error">Words:</label>
+		<% } else { %>
+			<label>Words:</label>
+		<% } %>
+		<ul>
+			<% foreach( split /,/, $wordset->{words} ) { %>
+			<li><input type="text" name="words" value="<%=$_%>" /></li>
+			<% }%>
+			<% for(1 .. 10) { %>
+			<li><input type="text" name="words" /></li>
+			<% } %>
+		</ul>		
+	</p>	
+	<p>
+		 <button type="submit">Submit</button>
+	</p>
+</form>
+
+<p>
+	<h3>Delete wordset</h3>
+	%= form_for 'setsiddelete' => begin
+		<button type="submit">Delete</button>
+	% end
+</p>

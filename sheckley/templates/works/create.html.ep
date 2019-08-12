@@ -1,0 +1,48 @@
+<%
+	  layout('default');
+	  title('Upload text');
+	  
+	  use vars qw($self);
+%> 
+
+<h2>Create new work</h2>
+
+<form method="POST" enctype="multipart/form-data" class="sheckley-form">
+	  <p>
+			<label>Work title:</label>
+			%= text_field 'title'
+	  </p>
+	  <p>
+			<label>Literature work type:</label>
+			%= select_field type => $work_types
+	  </p>
+	  <p>
+			<label>First publishing date:</label>
+			%= date_field 'pub_date'
+	  </p>
+	  <p>
+			<label>Series (optional):</label>
+			%= select_field series_id => $series			
+	  </p>
+	  <p>
+			<label>First line:</label>
+			%= number_field 'line_start'
+			<i>skip lines until this line</i>
+	  </p>
+	  <p>
+			<label>Last line:</label>
+			%= number_field 'line_end'
+			<i>skip lines after this line</i>
+	  </p>
+	  <p>			
+			<% if( $self->stash("mojo.validation")->error('upload') ) { %>
+				  <label class="field-with-error">Gutenberg file:</label>					  
+			<% } else { %>
+				  <label>Gutenberg file:</label>			
+			<% } %>
+			%= file_field 'upload'
+	  </p>
+	  <p>
+			%= submit_button 'Upload'		
+	  </p>
+</form>

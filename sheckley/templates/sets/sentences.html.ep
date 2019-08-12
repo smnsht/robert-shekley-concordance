@@ -1,0 +1,37 @@
+<%
+	layout('default');
+	title('Sentences by wordset');
+	
+	use vars qw($sentences);
+%>
+
+<h1>Sentences in wordset &quot;<%= $wordset->{name} %>&quot;</h1>
+
+<h2>Wordset &quot;<%= link_to $wordset->{name} => 'setsid' %>&quot;:</h2>
+
+<pre>
+	%= dumper($wordset->{words})
+</pre>
+
+<h3>Sentences:</h3>
+
+<table class="zebra">
+	<thead>
+		<tr>
+			<th>Word</th>
+			<th>Work</th>
+			<th>No#</th>
+			<th>Sentence</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% foreach (@$sentences) { %>
+		<tr>
+			<td><%= $_->{word} %></td>
+			<td><%= $_->{title} %></td>
+			<td><%= $_->{ordinal} %></td>
+			<td><%= $_->{content} %></td>
+		</tr>
+		<% }%>
+	</tbody>
+</table>

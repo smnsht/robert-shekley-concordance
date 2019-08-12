@@ -1,0 +1,44 @@
+<%
+	layout('default');
+	title('Welcome');
+	
+	use vars qw($wordsets);
+	
+	sub _words {
+		my $words = shift;
+		return ( length($words) < 40 )
+			? $words
+			: substr($words, 0, 40) . "...";
+	}
+%>
+
+<h1>Wordsets</h1>
+
+<table class="zebra">
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Description</th>
+			<th>Words</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% foreach (@$wordsets) { %>
+		<tr>
+			<td><%= $_->{name} %></td>
+			<td><%= $_->{description} %></td>
+			<td><%= _words($_->{words}) %></td>
+			<td>				
+				<a href="/sets/<%=$_->{id}%>">Edit</a> |
+				<a href="/sets/<%=$_->{id}%>/lines">Lines</a> |
+				<a href="/sets/<%=$_->{id}%>/sentences">Sentences</a>				
+			</td>
+		</tr>
+		<% }%>
+	</tbody>
+</table>
+
+<p>
+	<a href="/sets/create">Create new wordset</a>
+</p>

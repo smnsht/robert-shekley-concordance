@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+   <meta charset="UTF-8">
+  
+  <style type="text/css">
+      label.field-with-error { color: #dd7e5e }
+      input.field-with-error { background-color: #fd9e7e }
+	  select.field-with-error { background-color: #fd9e7e }
+	  
+	  #flash-notice { border: 1px solid green; padding: 1em; margin: 1em; }
+	  #flash-notice h3 { color: green;}
+	  #flash-error { border: 1px solid red; padding: 1em; margin: 1em; }
+	  #flash-error h3 { color: red; }
+	  
+	  form.sheckley-form p label { display: block; font-weight: bold; padding-bottom: 0.5em; }
+	  form.sheckley-form p i { display: block; font-size: 0.8em; color: grey; }
+	  
+	  i.tooltip { background: gray; border: 1px solid black; border-radius: 5px; }
+	  
+	  table.zebra tbody tr:nth-child(even) { background-color: #f2f2f2 }
+	  
+	  .center { text-align:center; }
+  </style>
+
+  <head>
+	<title><%= title %></title>
+  </head>
+  <body>
+	<nav>
+	  <a href="/">Home</a> |
+	  <a href="/sets">Wordsets</a> |	  
+	  <a href="/works">Works</a> |
+	  <a href="/#h2-series">Work series</a>
+	  <a href="/phrases">Phrases</a>
+	</nav>
+	
+	<% if (my $notice = flash('notice') ) { %>
+	<div id="flash-notice">
+		<h3>Notice:</h3>
+		<%= $notice %>
+	</div>
+	<% } %>
+	
+	<% if (my $error = flash('error') ) { %>
+	<div id="flash-error">
+		<h3>Error!</h3>
+		<%= $error %>
+	</div>
+	<% } %>
+	
+	<div>
+	  <%= content %>  
+	</div>
+	
+	<footer>
+		<hr />
+		<br />
+		<p class="center">Robert Shekley's Concordance - by Simon S</p>
+		<p class="center">
+			<img src="/img/dimention-of-miracles.jpg" alt="dimention-of-miracles.jpg" />	
+		</p>		
+	</footer>
+	
+  </body>
+</html>

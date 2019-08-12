@@ -1,0 +1,68 @@
+<%
+	use vars qw($work $index $lines);
+	
+	layout('default');
+	title($work->{title});
+	
+	sub links_to_lines {
+		my $ary_ref = shift;
+		my @links = map { "<a href='#$_'>$_</a>" } @$ary_ref;
+		return join ',', @links;
+	}	
+%>
+
+<h1><%= $work->{title} %> - lines </h1>
+
+<p id="p-submenu">
+	%= link_to 'Return to raw file' => 'worksid'
+	| <a href="#h2-lines">View lines</a>
+</p>
+
+<table>
+	<thead>
+		<tr>
+			<th>Word</th>
+			<th>Where in lines?</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% foreach( sort keys %$index) { %>
+		<tr>
+			<td><%= $_ %></td>
+			<td><%= b(links_to_lines($index->{$_})) %></td>
+		</tr>
+		<% } %>
+	</tbody>
+</table>
+
+
+<h2 id="h2-lines">Lines (non-blank)</h2>
+
+<table>
+	<thead>
+		<tr>
+			<th>LF <i title="Line in file" class="tooltip">?</i></th>
+			<th>LO <i title="Line ordinal" class="tooltip">?</i></th>			
+			<th>Line</th>
+			<th>Para # <i title="Paragraph number" class="tooltip">?</i></th>			
+			<th>WC <i title="Words count" class="tooltip">?</i></th>
+			<th>LC <i title="Letters count" class="tooltip">?</i></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% foreach (@$lines) { %>
+		<tr>
+			<td><%= $_->{file_line_no} %></td>
+			<td><b id="<%=$_->{text_line_no}%>"><%= $_->{text_line_no} %></b></td>
+			<td><%= $_->{text_norm} %></td>
+			<td><%= $_->{paragraph_no} %></td>
+			<td><%= $_->{words_c} %></td>
+			<td><%= $_->{letters_c} %></td>
+		</tr>
+		<% } %>
+	</tbody>
+</table>
+
+<p>
+	<a href="#p-submenu">Go up</a>
+</p>

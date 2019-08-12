@@ -1,0 +1,45 @@
+<%
+	layout('default');
+	title('Works - list');
+	
+	use vars qw($works);
+%> 
+
+<h2>Works - list</h2>
+
+<table class="zebra">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Title</th>
+			<th>Type</th>
+			<th>Series</th>
+			<th>Published at</th>
+			<th>Words count</th>
+			<th>Letters count</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% foreach(@$works) { %>
+		<tr>
+			<td><%= $_->{id} %></td>
+			<td><%= $_->{title} %></td>
+			<td><%= $_->{type} %></td>
+			<td><%= $_->{ser_title} || '--' %></td>
+			<td><%= $_->{pub_date} %></td>
+			<td><%= $_->{words_c} %></td>
+			<td><%= $_->{letters_c} %></td>
+			<td>
+				<a href="/works/<%=$_->{id}%>">Edit</a>
+				<a href="/works/<%=$_->{id}%>/lines">Lines</a>
+				<a href="/works/<%=$_->{id}%>/sentences">Sentences</a>
+			</td>
+		</tr>
+		<% }%>
+	</tbody>
+</table>
+
+<p>
+	%= link_to 'Add new work' => 'workscreate'
+</p>

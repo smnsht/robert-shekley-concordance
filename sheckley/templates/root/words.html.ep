@@ -1,0 +1,37 @@
+<%
+	layout('default');
+	title('Words by letter ' . param('letter'));
+	
+	use vars qw($words_l $words_s);
+	
+	sub _lines {
+		my $w = $_[0];
+		return b(qq{<a href="/words/$w/lines">$w</a>});
+	}
+	
+	sub _sen {
+		my $w = $_[0];
+		return b(qq{<a href="/words/$w/sentences">$w</a>});
+	}
+%>
+
+<h1><%= title %></h1>
+
+<table>
+	<tr>
+		<td>			
+			<ul>
+				<% foreach (@$words_l) { %>
+				<li><%= _lines($_->{word}) %> (<%= $_->{count} %>)</li>
+				<% }%>
+			</ul>
+		</td>
+		<td>
+			<ul>
+				<% foreach (@$words_s) { %>
+				<li><%= _sen($_->{word}) %> (<%= $_->{count} %>)</li>
+				<% }%>
+			</ul>
+		</td>
+	</tr>
+</table>

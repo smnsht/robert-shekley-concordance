@@ -1,0 +1,8 @@
+<%
+	layout('default');
+	title('Lines with word ' . param('word'));
+%>
+
+<h1>Lines with word &quot;<%= param('word') %>&quot;</h1>
+
+%= include '_lines'

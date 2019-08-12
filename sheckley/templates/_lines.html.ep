@@ -1,0 +1,22 @@
+<h3>Lines of text:</h3>
+
+<table class="zebra">
+	<thead>
+		<tr>
+			<th>Word</th>
+			<th>Work</th>
+			<th><span style="white-space: nowrap;">Line no#</span></th>
+			<th><span style="white-space: nowrap;">Line (raw)</span></th>
+		</tr>
+	</thead>
+	<tbody>
+		<% foreach (@$lines) { %>
+		<tr>
+			<td><%= $_->{word} %></td>
+			<td><%= $_->{title} %></td>
+			<td><%= $_->{text_line_no} %></td>
+			<td><%= $_->{text_raw} %></td>
+		</tr>
+		<% }%>
+	</tbody>
+</table>

@@ -1,0 +1,30 @@
+<%
+	layout('default');
+	title('Robert Shekley');
+	
+	use vars qw($series);
+%>
+
+<h1>Robert Shekley</h1>
+
+<p>
+	<b>Robert Sheckley</b> (July 16, 1928 – December 9, 2005) was an American writer. First published in the science-fiction magazines of the 1950s, his numerous quick-witted stories and novels were famously unpredictable, absurdist, and broadly comical. 
+</p>
+
+<p>
+	<img src="/img/Robert_Sheckley_in_the_mid-1990s.jpeg" />
+</p>
+
+<h2 id="h2-series">Series by Robert Sheckley</h2>
+<ul>
+	<% foreach (@$series ) { %>
+	<li><%= $_->{title} %></li>
+	<% } %>
+</ul>
+
+<p>
+	<a href="/works">All uploaded works</a>
+</p>
+
+<h3>Words: </h3>
+%= b(join('&nbsp;&nbsp;', @$w_index))

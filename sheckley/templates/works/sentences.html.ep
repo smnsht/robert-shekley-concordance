@@ -1,0 +1,68 @@
+<%
+	use vars qw($work $sentences $index);
+	
+	layout('default');
+	title($work->{title});
+	
+	sub _col1 {
+		return sprintf('<b id="%d">%s</b>', $_[0], $_[1]);
+	}
+	
+	sub links_to_lines {
+		my $ary_ref = shift;
+		my @links = map { "<a href='#$_'>$_</a>" } @$ary_ref;
+		return join ',', @links;
+	}
+%> 
+
+<h1><%= $work->{title} %> - sentences </h1>
+
+<p id="p-submenu">
+	%= link_to 'Return to raw file' => 'worksid'
+	| <a href="#h2-sentences">View sentences</a>
+</p>
+
+<table>
+	<thead>
+		<tr>
+			<th>Word</th>
+			<th>Where in sentence?</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% foreach( sort keys %$index) { %>
+		<tr>
+			<td><%= $_ %></td>
+			<td><%= b(links_to_lines($index->{$_})) %></td>
+		</tr>
+		<% } %>
+	</tbody>
+</table>
+
+
+<h2 id="h2-sentences">Sentences</h2>
+
+<table>
+	<thead>
+		<tr>
+			<th># <i title="Sentence number..." class="tooltip">?</i></th>						
+			<th>
+				<span style="white-space: nowrap;">Para # <i title="Paragraph number" class="tooltip">?</i></span>
+			</th>
+			<th>Sentence</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% foreach (@$sentences) { %>
+		<tr>			
+			<td><%= b(_col1($_->{id}, $_->{ordinal})) %></td>
+			<td><%= $_->{paragraph_no} %></td>			
+			<td><%= $_->{content} %></td>			
+		</tr>
+		<%  } %>
+	</tbody>
+</table>
+
+<p>
+	<a href="#p-submenu">Go up</a>
+</p>

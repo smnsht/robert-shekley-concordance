@@ -1,0 +1,22 @@
+<h3>Sentences:</h3>
+
+<table class="zebra">
+	<thead>
+		<tr>
+			<th>Word</th>
+			<th>Work</th>
+			<th>No#</th>
+			<th>Sentence</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% foreach (@$sentences) { %>
+		<tr>
+			<td><%= $_->{word} %></td>
+			<td><%= $_->{title} %></td>
+			<td><%= $_->{ordinal} %></td>
+			<td><%= $_->{content} %></td>
+		</tr>
+		<% }%>
+	</tbody>
+</table>

@@ -1,0 +1,37 @@
+<%
+	layout('default');
+	title($work->{title});
+	
+	my $series = stash('series');
+	
+	use vars qw($work);
+%> 
+
+<h1><%= $work->{title} %></h1>
+
+<ul>
+	<li><b>Publishing date:</b> <%= $work->{pub_date} %></li>
+	<% if ( $series ) { %>
+	<li><b>Series:</b> <%= $series->{title} %><br/></li>
+	<% } %>
+	<li><b>Work type:</b> <%= $work->{type} %></li>
+	<li><b>Words count:</b> <%= $work->{words_c} %></li>
+	<li><b>Letters count:</b> <%= $work->{letters_c} %></li>
+	<li>
+		<b>Drill down:</b>
+		%= link_to 'Words in lines' => 'worksidlines'
+		|
+		%= link_to 'Words in sentences' => 'worksidsentences'				
+	</li>
+</ul>
+
+
+%= form_for 'worksiddelete' => begin
+	<button type="submit" style="color: red;">Delete</button>
+% end
+
+<h2>Raw file contents (with line numbers)</h2>
+<hr />
+<pre>
+	<%= $raw_lines %>
+</pre>

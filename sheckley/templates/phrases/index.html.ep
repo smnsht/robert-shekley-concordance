@@ -1,0 +1,44 @@
+<%
+	layout('default');
+	title('Phrases');
+	
+	use vars qw($phrases);
+%>
+<style>
+	form.inline { display: inline; }
+</style>
+
+<h1>Phrases</h1>
+
+<table class="zebra">
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Phrase</th>
+			<th>Actions</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% foreach(@$phrases) { %>
+		<tr>
+			<td><%= $_->{id} %></td>
+			<td><%= $_->{text} %></td>
+			<td>				
+				<form action="<%=sprintf('/phrases/%d/delete', $_->{id})%>" method="POST" class="inline">
+					<button type="submit">Delete</button>
+				</form>
+				
+				<form action="<%=sprintf('/phrases/%d/search', $_->{id})%>" method="GET" class="inline">
+					<button type="submit">Search</button>
+				</form>
+			</td>
+		</tr>	
+		<% } %>		
+	</tbody>
+</table>
+
+<h2>Add new phraze</h2>
+%= form_for 'phrases' => begin
+	<input type="text" name="text" maxlen="100" />
+	<button type="submit">Save</button>
+% end

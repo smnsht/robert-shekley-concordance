@@ -1,0 +1,33 @@
+% layout 'default';
+% title 'Create new wordset';
+
+<h1>Create new wordset</h1>
+
+%= form_for setscreate => begin
+	<p>
+		<label>Wordset name:</label>
+		%= tel_field 'name'
+	</p>
+	
+	<p>
+		<label>Description</label>
+		%= tel_field 'description'
+	</p>
+	
+	<p>
+		
+		<% if ($self->stash('mojo.validation')->error('words')) { %>
+			<label class="field-with-error">Words:</label>
+		<% } else { %>
+			<label>Words:</label>
+		<% } %>
+		<ul>
+			<% for(1 .. 10) { %>
+			<li><input type="text" name="words" /></li>
+			<% } %>
+		</ul>		
+	</p>	
+	<p>
+		 <button type="submit" name="foo" value="boo">Submit</button>
+	</p>
+%= end
